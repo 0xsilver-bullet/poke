@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poke/app_theme.dart';
 import 'package:poke/di/locator.dart';
+import 'package:poke/home/blocs/pokemon_bloc/pokemon_bloc.dart';
 import 'package:poke/home/screen/home_screen.dart';
 
 void main() async {
@@ -18,7 +20,10 @@ class PokeApp extends StatelessWidget {
       title: 'Poke',
       theme: PokeAppTheme.appTheme,
       darkTheme: PokeAppTheme.appTheme,
-      home: const HomeScreen(),
+      home: BlocProvider(
+        create: (_) => PokemonBloc(),
+        child: const HomeScreen(),
+      ),
     );
   }
 }

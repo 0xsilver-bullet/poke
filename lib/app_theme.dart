@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 abstract class PokeAppColors {
+  static const lightGrey = Color(0xFF535353);
   static const darkGrey = Color(0xFF1F1F1F);
 }
 
