@@ -17,7 +17,5 @@ void _provideDioSingleton() {
 }
 
 void _providePokemonRepository() {
-  locator.registerFactory<PokemonRepository>(
-    () => PokemonRepositoryImpl(),
-  );
+  locator.registerSingleton<PokemonRepository>(PokemonRepositoryImpl());
 }

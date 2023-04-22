@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:poke/home/widget/pokemon_item.dart';
+import 'package:poke/feature/pokemon_details/screen/pokemon_details_screen.dart';
 
 import '../blocs/pokemon_bloc/pokemon_bloc.dart';
+import '../widget/pokemon_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -38,18 +39,35 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (ctx, state) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: GridView.builder(
+            child: CustomScrollView(
               controller: _scrollController,
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 150,
-                mainAxisExtent: 150,
-                mainAxisSpacing: 16,
-                crossAxisSpacing: 16,
-              ),
-              itemCount: state.pokemons.length,
-              itemBuilder: (ctx, index) {
-                return PokemonItem(pokemon: state.pokemons[index]);
-              },
+              slivers: [
+                SliverAppBar(
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Image.asset(
+                      'assets/images/pokemons.png',
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  expandedHeight: 200,
+                ),
+                SliverGrid.builder(
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 150,
+                    mainAxisExtent: 150,
+                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 16,
+                  ),
+                  itemBuilder: (ctx, index) {
+                    return PokemonItem(
+                      pokemon: state.pokemons[index],
+                      onClick: (pokemon) => Navigator.of(ctx)
+                          .push(PokemonDetailsScreen.buildRoute(pokemon)),
+                    );
+                  },
+                  itemCount: state.pokemons.length,
+                )
+              ],
             ),
           );
         },

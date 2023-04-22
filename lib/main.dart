@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poke/app_theme.dart';
 import 'package:poke/di/locator.dart';
-import 'package:poke/home/blocs/pokemon_bloc/pokemon_bloc.dart';
-import 'package:poke/home/screen/home_screen.dart';
+
+import 'feature/home/blocs/pokemon_bloc/pokemon_bloc.dart';
+import 'feature/home/screen/home_screen.dart';
 
 void main() async {
   setupDI();

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:poke/core/network/dto/pokemon_details_dto.dart';
 import 'package:poke/core/network/dto/pokemon_dto.dart';
 import 'package:poke/di/locator.dart';
 
@@ -32,6 +33,19 @@ class PokeApi {
       return pokemonsList;
     } catch (e) {
       return [];
+    }
+  }
+
+  Future<PokemonDetailsDto> fetchPokemonDetails(String url) async {
+    try {
+      final response = await _dio.get(url);
+      if (response.statusCode != 200) {
+        throw Exception('Unexpected error');
+      }
+      return PokemonDetailsDto.fromJson(response.data);
+    } catch (e) {
+      // TODO: handle this better
+      rethrow;
     }
   }
 }
